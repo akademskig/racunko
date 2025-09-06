@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id          String   @id @default(cuid())
+  name        String
+  address     String?
+  city        String?
+  postalCode  String?
+  country     String   @default("Croatia")
+  oib         String?  @unique
+  vatNumber   String?
+  email       String?
+  phone       String?
+  website     String?
+  logo        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  invoices Invoice[]
+  clients  Client[]
+
+  @@map("companies")
+}
+
+model Client {
+  id          String   @id @default(cuid())
+  name        String
+  address     String?
+  city        String?
+  postalCode  String?
+  country     String   @default("Croatia")
+  oib         String?
+  vatNumber   String?
+  email       String?
+  phone       String?
+  website     String?
+  companyId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company   Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  invoices  Invoice[]
+
+  @@map("clients")
+}
+
+model Invoice {
+  id              String        @id @default(cuid())
+  invoiceNumber   String
+  issueDate       DateTime
+  dueDate         DateTime?
+  status          InvoiceStatus @default(DRAFT)
+  subtotal        Decimal       @db.Decimal(10, 2)
+  vatRate         Decimal       @db.Decimal(5, 2) @default(25.00)
+  vatAmount       Decimal       @db.Decimal(10, 2)
+  total           Decimal       @db.Decimal(10, 2)
+  currency        String        @default("HRK")
+  notes           String?
+  paymentTerms    String?
+  companyId       String
+  clientId        String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  company   Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  client    Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  items     InvoiceItem[]
+
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  description String
+  quantity    Decimal @db.Decimal(10, 2)
+  unitPrice   Decimal @db.Decimal(10, 2)
+  total       Decimal @db.Decimal(10, 2)
+  vatRate     Decimal @db.Decimal(5, 2) @default(25.00)
+  invoiceId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_items")
+}
+
+model TaxRule {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  vatRate     Decimal  @db.Decimal(5, 2)
+  category    String?
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  source      String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("tax_rules")
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}

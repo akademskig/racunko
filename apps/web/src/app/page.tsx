@@ -1,103 +1,179 @@
-import Image from "next/image";
+'use client'
+
+import Link from "next/link";
+import {
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Box,
+  Paper
+} from '@mui/material';
+import {
+  Description,
+  People,
+  Business,
+  Calculate
+} from '@mui/icons-material';
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Box textAlign="center" mb={8}>
+          <Typography variant="h2" component="h1" gutterBottom color="primary">
+            Računko
+          </Typography>
+          <Typography variant="h5" color="text.secondary" gutterBottom>
+            Smart Invoice Management with Tax Intelligence
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', mt: 2 }}>
+            Create, manage, and export invoices with automatic VAT calculations and
+            real-time tax regulation updates from Croatian tax authorities.
+          </Typography>
+        </Box>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <Grid container spacing={4} mb={8}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <Description color="primary" sx={{ mr: 1 }} />
+                  <Typography variant="h6" component="h2">
+                    Invoices
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  Create and manage your invoices with automatic calculations
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button component={Link} href="/invoices" size="small">
+                  Manage Invoices
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <People color="primary" sx={{ mr: 1 }} />
+                  <Typography variant="h6" component="h2">
+                    Clients
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  Manage your client database and contact information
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button component={Link} href="/clients" size="small">
+                  Manage Clients
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <Business color="primary" sx={{ mr: 1 }} />
+                  <Typography variant="h6" component="h2">
+                    Company
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  Configure your company details and settings
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button component={Link} href="/companies" size="small">
+                  Manage Company
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <Calculate color="primary" sx={{ mr: 1 }} />
+                  <Typography variant="h6" component="h2">
+                    Tax Rules
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  View current tax rates and regulations
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button component={Link} href="/tax" size="small">
+                  View Tax Rules
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
+
+        <Paper sx={{ p: 4 }}>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Features
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" gutterBottom>
+                Invoice Management
+              </Typography>
+              <Box component="ul" sx={{ pl: 2 }}>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Create professional invoices
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Automatic VAT calculations
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  PDF export functionality
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Invoice status tracking
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Recurring invoice support
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" gutterBottom>
+                Tax Intelligence
+              </Typography>
+              <Box component="ul" sx={{ pl: 2 }}>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Real-time tax rate updates
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Croatian VAT regulations
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Automatic compliance checking
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Tax rule notifications
+                </Typography>
+                <Typography component="li" variant="body2" gutterBottom>
+                  Multi-currency support
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
+    </Box>
   );
 }

@@ -1,0 +1,31 @@
+{
+    "name": "@racunko/api",
+    "version": "0.1.0",
+    "private": true,
+    "main": "./src/app.ts",
+    "scripts": {
+        "dev": "tsx watch src/app.ts",
+        "build": "tsc",
+        "start": "node dist/app.js",
+        "lint": "eslint src/**/*.ts"
+    },
+    "dependencies": {
+        "@racunko/db": "*",
+        "@racunko/pdf-generator": "*",
+        "express": "^4.21.1",
+        "cors": "^2.8.5",
+        "helmet": "^8.0.0",
+        "morgan": "^1.10.0",
+        "dotenv": "^16.4.5",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/cors": "^2.8.17",
+        "@types/morgan": "^1.9.9",
+        "@types/node": "^22.10.2",
+        "tsx": "^4.19.2",
+        "typescript": "^5.7.2",
+        "eslint": "^9.17.0"
+    }
+}
