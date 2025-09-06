@@ -1,0 +1,20 @@
+// racunko/tsconfig.json
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@web/*": [
+                "apps/web/src/*"
+            ],
+            "@api/*": [
+                "packages/api/src/*"
+            ],
+            "@db/*": [
+                "packages/db/src/*"
+            ],
+            "@utils/*": [
+                "packages/utils/src/*"
+            ]
+        }
+    }
+}
