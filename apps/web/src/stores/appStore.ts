@@ -1,0 +1,121 @@
+import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
+
+// Types
+export interface Invoice {
+    id: string
+    invoiceNumber: string
+    issueDate: string
+    dueDate?: string
+    status: 'DRAFT' | 'SENT' | 'PAID' | 'OVERDUE' | 'CANCELLED'
+    total: number
+    currency: string
+    client: {
+        name: string
+    }
+    company: {
+        name: string
+    }
+}
+
+export interface AppState {
+    // UI State
+    sidebarOpen: boolean
+    notifications: Notification[]
+
+    // Actions
+    toggleSidebar: () => void
+    setSidebarOpen: (open: boolean) => void
+    addNotification: (notification: Omit<Notification, 'id'>) => void
+    removeNotification: (id: string) => void
+    clearNotifications: () => void
+}
+
+interface Notification {
+    id: string
+    type: 'success' | 'error' | 'warning' | 'info'
+    message: string
+    duration?: number
+}
+
+// Create the store
+export const useAppStore = create<AppState>()(
+    devtools(
+        persist(
+            (set, get) => ({
+                // Initial state
+                sidebarOpen: false,
+                notifications: [],
+
+                // Actions
+                toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+                setSidebarOpen: (open) => set({ sidebarOpen: open }),
+
+                addNotification: (notification) => {
+                    const id = Math.random().toString(36).substr(2, 9)
+                    const newNotification = { ...notification, id }
+                    set((state) => ({
+                        notifications: [...state.notifications, newNotification]
+                    }))
+
+                    // Auto-remove notification after duration
+                    if (notification.duration !== 0) {
+                        setTimeout(() => {
+                            get().removeNotification(id)
+                        }, notification.duration || 5000)
+                    }
+                },
+
+                removeNotification: (id) => set((state) => ({
+                    notifications: state.notifications.filter(n => n.id !== id)
+                })),
+
+                clearNotifications: () => set({ notifications: [] }),
+            }),
+            {
+                name: 'app-store',
+                partialize: (state) => ({ sidebarOpen: state.sidebarOpen }),
+            }
+        ),
+        {
+            name: 'app-store',
+        }
+    )
+)
+
+// Individual selectors to avoid object recreation
+export const useSidebarOpen = () => useAppStore((state) => state.sidebarOpen)
+export const useToggleSidebar = () => useAppStore((state) => state.toggleSidebar)
+export const useSetSidebarOpen = () => useAppStore((state) => state.setSidebarOpen)
+
+export const useNotificationsList = () => useAppStore((state) => state.notifications)
+export const useAddNotification = () => useAppStore((state) => state.addNotification)
+export const useRemoveNotification = () => useAppStore((state) => state.removeNotification)
+export const useClearNotifications = () => useAppStore((state) => state.clearNotifications)
+
+// Convenience hooks that return objects (use with caution in SSR)
+export const useSidebar = () => {
+    const sidebarOpen = useSidebarOpen()
+    const toggleSidebar = useToggleSidebar()
+    const setSidebarOpen = useSetSidebarOpen()
+
+    return {
+        isOpen: sidebarOpen,
+        toggle: toggleSidebar,
+        setOpen: setSidebarOpen,
+    }
+}
+
+export const useNotifications = () => {
+    const notifications = useNotificationsList()
+    const addNotification = useAddNotification()
+    const removeNotification = useRemoveNotification()
+    const clearNotifications = useClearNotifications()
+
+    return {
+        notifications,
+        add: addNotification,
+        remove: removeNotification,
+        clear: clearNotifications,
+    }
+}

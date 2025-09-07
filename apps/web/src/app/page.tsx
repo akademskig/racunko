@@ -21,7 +21,7 @@ import {
 
 export default function Home() {
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
+    <Box sx={{ minHeight: '100vh' }}>
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Box textAlign="center" mb={8}>
           <Typography variant="h2" component="h1" gutterBottom color="primary">

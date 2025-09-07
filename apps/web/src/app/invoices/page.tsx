@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import {
@@ -31,89 +30,21 @@ import {
     Description as DescriptionIcon
 } from '@mui/icons-material'
 import { ThemeToggle } from '../../components/theme/ThemeToggle'
-
-interface Invoice {
-    id: string
-    invoiceNumber: string
-    issueDate: string
-    dueDate?: string
-    status: 'DRAFT' | 'SENT' | 'PAID' | 'OVERDUE' | 'CANCELLED'
-    total: number
-    currency: string
-    client: {
-        name: string
-    }
-    company: {
-        name: string
-    }
-}
+import { Sidebar } from '../../components/Sidebar'
+import { useInvoices, useDeleteInvoice, useDownloadInvoicePDF, Invoice } from '../../hooks/useInvoices'
 
 export default function InvoicesPage() {
-    const [invoices, setInvoices] = useState<Invoice[]>([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
-
-    useEffect(() => {
-        fetchInvoices()
-    }, [])
-
-    const fetchInvoices = async () => {
-        try {
-            const response = await fetch('http://localhost:3001/api/invoices')
-            if (!response.ok) {
-                throw new Error('Failed to fetch invoices')
-            }
-            const data = await response.json()
-            setInvoices(data)
-        } catch (error) {
-            console.error('Error fetching invoices:', error)
-            setError('Failed to load invoices. Please check if the API server is running.')
-        } finally {
-            setLoading(false)
-        }
-    }
+    const { data: invoices = [], isLoading, error } = useInvoices()
+    const deleteInvoiceMutation = useDeleteInvoice()
+    const downloadPDFMutation = useDownloadInvoicePDF()
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this invoice?')) return
-
-        try {
-            const response = await fetch(`http://localhost:3001/api/invoices/${id}`, {
-                method: 'DELETE'
-            })
-            if (response.ok) {
-                fetchInvoices()
-            } else {
-                throw new Error('Failed to delete invoice')
-            }
-        } catch (error) {
-            console.error('Error deleting invoice:', error)
-            setError('Failed to delete invoice')
-        }
+        deleteInvoiceMutation.mutate(id)
     }
 
     const handleDownloadPDF = async (id: string) => {
-        try {
-            const response = await fetch(`http://localhost:3001/api/pdf/invoice/${id}`, {
-                method: 'POST'
-            })
-
-            if (response.ok) {
-                const blob = await response.blob()
-                const url = window.URL.createObjectURL(blob)
-                const a = document.createElement('a')
-                a.href = url
-                a.download = `invoice-${id}.pdf`
-                document.body.appendChild(a)
-                a.click()
-                window.URL.revokeObjectURL(url)
-                document.body.removeChild(a)
-            } else {
-                throw new Error('Failed to generate PDF')
-            }
-        } catch (error) {
-            console.error('Error downloading PDF:', error)
-            setError('Failed to generate PDF')
-        }
+        downloadPDFMutation.mutate(id)
     }
 
     const getStatusColor = (status: string): 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning' => {
@@ -127,7 +58,7 @@ export default function InvoicesPage() {
         }
     }
 
-    if (loading) {
+    if (isLoading) {
         return (
             <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Box textAlign="center">
@@ -144,13 +75,16 @@ export default function InvoicesPage() {
         <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
             <Container maxWidth="lg" sx={{ py: 4 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
-                    <Box>
-                        <Typography variant="h3" component="h1" gutterBottom>
-                            Invoices
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary">
-                            Manage your invoices and track payments
-                        </Typography>
+                    <Box display="flex" alignItems="center" gap={2}>
+                        <Sidebar />
+                        <Box>
+                            <Typography variant="h3" component="h1" gutterBottom>
+                                Invoices
+                            </Typography>
+                            <Typography variant="body1" color="text.secondary">
+                                Manage your invoices and track payments
+                            </Typography>
+                        </Box>
                     </Box>
                     <Box display="flex" alignItems="center" gap={2}>
                         <ThemeToggle />
@@ -167,8 +101,8 @@ export default function InvoicesPage() {
                 </Box>
 
                 {error && (
-                    <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
-                        {error}
+                    <Alert severity="error" sx={{ mb: 3 }}>
+                        {error.message || 'Failed to load invoices. Please check if the API server is running.'}
                     </Alert>
                 )}
 
@@ -200,7 +134,7 @@ export default function InvoicesPage() {
                                     </TableCell>
                                 </TableRow>
                             ) : (
-                                invoices.map((invoice) => (
+                                invoices.map((invoice: Invoice) => (
                                     <TableRow key={invoice.id} hover>
                                         <TableCell>
                                             <Typography variant="body2" fontWeight="medium">
@@ -236,8 +170,13 @@ export default function InvoicesPage() {
                                                         size="small"
                                                         onClick={() => handleDownloadPDF(invoice.id)}
                                                         color="primary"
+                                                        disabled={downloadPDFMutation.isPending}
                                                     >
-                                                        <DownloadIcon fontSize="small" />
+                                                        {downloadPDFMutation.isPending ? (
+                                                            <CircularProgress size={16} />
+                                                        ) : (
+                                                            <DownloadIcon fontSize="small" />
+                                                        )}
                                                     </IconButton>
                                                 </Tooltip>
                                                 <Tooltip title="View">
@@ -265,8 +204,13 @@ export default function InvoicesPage() {
                                                         size="small"
                                                         onClick={() => handleDelete(invoice.id)}
                                                         color="error"
+                                                        disabled={deleteInvoiceMutation.isPending}
                                                     >
-                                                        <DeleteIcon fontSize="small" />
+                                                        {deleteInvoiceMutation.isPending ? (
+                                                            <CircularProgress size={16} />
+                                                        ) : (
+                                                            <DeleteIcon fontSize="small" />
+                                                        )}
                                                     </IconButton>
                                                 </Tooltip>
                                             </Stack>
