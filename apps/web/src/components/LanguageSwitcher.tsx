@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Language as LanguageIcon } from '@mui/icons-material'
 import { useState } from 'react'
-import { useLocale } from '@web/contexts/LocaleContext'
+import { useLocale, useSetLocale } from '@web/stores/appStore'
 
 const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -21,7 +21,8 @@ const languages = [
 export const LanguageSwitcher: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
     const open = Boolean(anchorEl)
-    const { locale, setLocale } = useLocale()
+    const locale = useLocale()
+    const setLocale = useSetLocale()
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget)
@@ -34,6 +35,7 @@ export const LanguageSwitcher: React.FC = () => {
     const handleLanguageChange = (newLocale: 'en' | 'hr') => {
         handleClose()
         setLocale(newLocale)
+        // No URL navigation needed - locale is stored in localStorage
     }
 
     const currentLanguage = languages.find(lang => lang.code === locale) || languages[0]
