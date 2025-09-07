@@ -1,21 +1,7 @@
 'use client'
 
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '../contexts/ThemeContext'
 import CssBaseline from '@mui/material/CssBaseline'
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
-  },
-  typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-  },
-})
 
 export default function RootLayout({
   children,
@@ -25,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider>
           <CssBaseline />
           {children}
         </ThemeProvider>

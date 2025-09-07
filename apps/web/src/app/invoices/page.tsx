@@ -30,6 +30,7 @@ import {
     Delete as DeleteIcon,
     Description as DescriptionIcon
 } from '@mui/icons-material'
+import { ThemeToggle } from '../../components/theme/ThemeToggle'
 
 interface Invoice {
     id: string
@@ -140,7 +141,7 @@ export default function InvoicesPage() {
     }
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
+        <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
             <Container maxWidth="lg" sx={{ py: 4 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
                     <Box>
@@ -151,15 +152,18 @@ export default function InvoicesPage() {
                             Manage your invoices and track payments
                         </Typography>
                     </Box>
-                    <Button
-                        component={Link}
-                        href="/invoices/create"
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        size="large"
-                    >
-                        New Invoice
-                    </Button>
+                    <Box display="flex" alignItems="center" gap={2}>
+                        <ThemeToggle />
+                        <Button
+                            component={Link}
+                            href="/invoices/create"
+                            variant="contained"
+                            startIcon={<AddIcon />}
+                            size="large"
+                        >
+                            New Invoice
+                        </Button>
+                    </Box>
                 </Box>
 
                 {error && (
@@ -171,7 +175,7 @@ export default function InvoicesPage() {
                 <TableContainer component={Paper} sx={{ boxShadow: 2 }}>
                     <Table>
                         <TableHead>
-                            <TableRow sx={{ bgcolor: 'grey.50' }}>
+                            <TableRow>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Invoice</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Client</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Issue Date</TableCell>
