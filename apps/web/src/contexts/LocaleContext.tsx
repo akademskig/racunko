@@ -1,8 +1,7 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-
-type Locale = 'en' | 'hr'
+import React, { createContext, useContext, useEffect, ReactNode } from 'react'
+import { useLocale as useAppLocale, useSetLocale as useAppSetLocale, type Locale } from '../stores/appStore'
 
 interface LocaleContextType {
     locale: Locale
@@ -26,9 +25,10 @@ interface LocaleProviderProps {
 
 export const LocaleProvider: React.FC<LocaleProviderProps> = ({
     children,
-    initialLocale = 'en'
+    initialLocale = 'hr'
 }) => {
-    const [locale, setLocaleState] = useState<Locale>(initialLocale)
+    const locale = useAppLocale()
+    const setLocaleApp = useAppSetLocale()
 
     useEffect(() => {
         // Extract locale from URL path
@@ -36,19 +36,14 @@ export const LocaleProvider: React.FC<LocaleProviderProps> = ({
         const urlLocale = pathSegments[1] as Locale
 
         if (urlLocale && (urlLocale === 'en' || urlLocale === 'hr')) {
-            setLocaleState(urlLocale)
-        } else {
-            // Fallback to localStorage
-            const savedLocale = localStorage.getItem('locale') as Locale
-            if (savedLocale && (savedLocale === 'en' || savedLocale === 'hr')) {
-                setLocaleState(savedLocale)
-            }
+            setLocaleApp(urlLocale)
+        } else if (initialLocale) {
+            setLocaleApp(initialLocale)
         }
-    }, [])
+    }, [initialLocale, setLocaleApp])
 
     const setLocale = (newLocale: Locale) => {
-        setLocaleState(newLocale)
-        localStorage.setItem('locale', newLocale)
+        setLocaleApp(newLocale)
 
         // Update URL with new locale
         const currentPath = window.location.pathname

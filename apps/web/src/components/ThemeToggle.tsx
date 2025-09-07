@@ -3,16 +3,16 @@
 import React from 'react'
 import { IconButton, Tooltip, Box } from '@mui/material'
 import { Brightness4, Brightness7 } from '@mui/icons-material'
-import { useTheme } from '../../contexts/ThemeContext'
-import { useTranslation } from '../../hooks/useTranslation'
+import { useTranslation } from '@web/hooks/useTranslation'
+import { useTheme } from '@web/stores/appStore'
 
 export const ThemeToggle: React.FC = () => {
-    const { mode, toggleTheme } = useTheme()
+    const { toggleTheme, themeMode } = useTheme()
     const { t } = useTranslation()
 
     return (
         <Box>
-            <Tooltip title={mode === 'light' ? t.theme.switchToDark : t.theme.switchToLight}>
+            <Tooltip title={themeMode === 'light' ? t.theme.switchToDark : t.theme.switchToLight}>
                 <IconButton
                     onClick={toggleTheme}
                     color="inherit"
@@ -23,7 +23,7 @@ export const ThemeToggle: React.FC = () => {
                         },
                     }}
                 >
-                    {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+                    {themeMode === 'dark' ? <Brightness7 /> : <Brightness4 />}
                 </IconButton>
             </Tooltip>
         </Box>

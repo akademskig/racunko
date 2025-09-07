@@ -29,7 +29,7 @@ import {
     Delete as DeleteIcon,
     Description as DescriptionIcon
 } from '@mui/icons-material'
-import { ThemeToggle } from '@web/components/theme/ThemeToggle'
+import { ThemeToggle } from '@web/components/ThemeToggle'
 import { Sidebar } from '@web/components/Sidebar'
 import { LanguageSwitcher } from '@web/components/LanguageSwitcher'
 import { useInvoices, useDeleteInvoice, useDownloadInvoicePDF, Invoice } from '@web/hooks/useInvoices'

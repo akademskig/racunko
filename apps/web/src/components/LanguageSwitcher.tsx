@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Language as LanguageIcon } from '@mui/icons-material'
 import { useState } from 'react'
-import { useLocale } from '../contexts/LocaleContext'
+import { useLocale } from '@web/contexts/LocaleContext'
 
 const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },

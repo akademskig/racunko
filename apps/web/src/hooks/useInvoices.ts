@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useAddNotification } from '../stores/appStore'
+import { useAddNotification, useLocale } from '../stores/appStore'
 import { getTranslation } from './useTranslation'
-import { useLocale } from '../contexts/LocaleContext'
 
 // Types
 export interface Invoice {
@@ -68,7 +67,7 @@ export const useInvoices = () => {
 export const useDeleteInvoice = () => {
     const queryClient = useQueryClient()
     const addNotification = useAddNotification()
-    const { locale } = useLocale()
+    const locale = useLocale()
 
     return useMutation({
         mutationFn: deleteInvoice,
@@ -93,7 +92,7 @@ export const useDeleteInvoice = () => {
 
 export const useDownloadInvoicePDF = () => {
     const addNotification = useAddNotification()
-    const { locale } = useLocale()
+    const locale = useLocale()
 
     return useMutation({
         mutationFn: downloadInvoicePDF,
