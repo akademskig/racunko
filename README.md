@@ -5,7 +5,7 @@ A modern invoicing platform with tax intelligence for Croatian businesses.
 ## Features
 
 - **Invoice Management**: Create, edit, and manage professional invoices
-- **Client Database**: Store and manage client information  
+- **Client Database**: Store and manage client information
 - **PDF Export**: Generate professional PDF invoices
 - **VAT Calculations**: Automatic Croatian VAT calculations
 - **Tax Intelligence**: Real-time tax updates from Croatian tax authority
@@ -21,11 +21,13 @@ A modern invoicing platform with tax intelligence for Croatian businesses.
 ## Quick Start
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Start development environment**:
+
    ```bash
    ./start-dev.sh
    ```
@@ -37,11 +39,13 @@ A modern invoicing platform with tax intelligence for Croatian businesses.
 ## Manual Setup
 
 1. **Start database**:
+
    ```bash
    docker-compose up -d postgres
    ```
 
 2. **Setup database**:
+
    ```bash
    cd packages/db
    npm run db:generate
@@ -50,11 +54,12 @@ A modern invoicing platform with tax intelligence for Croatian businesses.
    ```
 
 3. **Start services**:
+
    ```bash
    # Web app
    npm run dev:web
-   
-   # API server  
+
+   # API server
    cd packages/api && npm run dev
    ```
 

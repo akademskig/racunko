@@ -1,120 +1,120 @@
 {
-    "common": {
-        "loading": "Učitavanje...",
-        "error": "Greška",
-        "success": "Uspjeh",
-        "cancel": "Odustani",
-        "save": "Spremi",
-        "delete": "Obriši",
-        "edit": "Uredi",
-        "view": "Prikaži",
-        "close": "Zatvori",
-        "back": "Natrag",
-        "next": "Sljedeće",
-        "previous": "Prethodno",
-        "search": "Pretraži",
-        "filter": "Filtriraj",
-        "sort": "Sortiraj",
-        "actions": "Akcije"
-    },
-    "navigation": {
-        "dashboard": "Nadzorna ploča",
-        "invoices": "Računi",
-        "clients": "Klijenti",
-        "settings": "Postavke",
-        "newInvoice": "Novi račun"
-    },
-    "invoices": {
-        "title": "Računi",
-        "subtitle": "Upravljajte svojim računima i pratite plaćanja",
-        "noInvoices": "Još nema računa",
-        "noInvoicesDescription": "Stvorite svoj prvi račun za početak",
-        "invoiceNumber": "Račun",
-        "client": "Klijent",
-        "issueDate": "Datum izdavanja",
-        "status": "Status",
-        "total": "Ukupno",
-        "downloadPDF": "Preuzmi PDF",
-        "deleteConfirm": "Jeste li sigurni da želite obrisati ovaj račun?",
-        "statuses": {
-            "DRAFT": "Nacrt",
-            "SENT": "Poslano",
-            "PAID": "Plaćeno",
-            "OVERDUE": "Dospjelo",
-            "CANCELLED": "Otkazano"
-        }
-    },
-    "theme": {
-        "switchToDark": "Prebaci na tamni način",
-        "switchToLight": "Prebaci na svijetli način"
-    },
-    "notifications": {
-        "invoiceDeleted": "Račun je uspješno obrisan",
-        "invoiceDeleteError": "Neuspješno brisanje računa",
-        "pdfDownloaded": "PDF je uspješno preuzet",
-        "pdfDownloadError": "Neuspješno generiranje PDF-a",
-        "invoicesLoadError": "Neuspješno učitavanje računa. Provjerite je li API server pokrenut."
-    },
-    "landing": {
-        "header": {
-            "getStarted": "Počni"
-        },
-        "hero": {
-            "badge": "Pametno upravljanje računima",
-            "title": "Pojednostavite svoje poslovanje pametnim računima",
-            "subtitle": "Stvarajte, upravljajte i pratite račune s automatskim izračunima PDV-a i ažuriranjima poreznih propisa hrvatskih poreznih vlasti u stvarnom vremenu.",
-            "cta": "Počni upravljati računima",
-            "demo": "Pogledaj demo",
-            "demoTitle": "Pregled računa",
-            "demoDescription": "Profesionalni računi s automatskim izračunima i provjerom usklađenosti."
-        },
-        "stats": {
-            "invoices": "Obrađenih računa",
-            "clients": "Zadovoljnih klijenata",
-            "uptime": "Dostupnost",
-            "support": "Podrška"
-        },
-        "features": {
-            "title": "Moćne značajke",
-            "subtitle": "Sve što trebate za učinkovito upravljanje financijama vašeg poslovanja",
-            "invoicing": {
-                "title": "Pametni računi",
-                "description": "Stvarajte profesionalne račune s automatskim izračunima PDV-a i provjerom usklađenosti."
-            },
-            "automation": {
-                "title": "Automatizacija",
-                "description": "Automatizirajte ponavljajuće račune, podsjetnike za plaćanje i porezne izračune."
-            },
-            "security": {
-                "title": "Sigurnost na razini banke",
-                "description": "Vaši podaci su zaštićeni sigurnošću i šifriranjem na razini poduzeća."
-            },
-            "cloud": {
-                "title": "Oblak",
-                "description": "Pristupite svojim računima bilo gdje, bilo kada s našom sigurnom oblaku platformom."
-            }
-        },
-        "testimonials": {
-            "title": "Što kažu naši kupci",
-            "subtitle": "Pridružite se tisućama zadovoljnih poduzeća koja koriste Racunko",
-            "user1": {
-                "name": "Marko Petrović",
-                "role": "CEO, TechStart Croatia",
-                "content": "Racunko je revolucionirao naš proces izdavanja računa. Automatski porezni izračuni nam štede sate svaki tjedan."
-            },
-            "user2": {
-                "name": "Ana Novak",
-                "role": "Slobodni dizajner",
-                "content": "Konačno, rješenje za račune koje razumije hrvatske porezne propise. Toplo preporučujem!"
-            }
-        },
-        "cta": {
-            "title": "Spremni transformirati svoje račune?",
-            "subtitle": "Pridružite se tisućama poduzeća koja već koriste Racunko za pojednostavljenje svojih operacija.",
-            "button": "Počni besplatno"
-        },
-        "footer": {
-            "rights": "Sva prava pridržana."
-        }
+  "common": {
+    "loading": "Učitavanje...",
+    "error": "Greška",
+    "success": "Uspjeh",
+    "cancel": "Odustani",
+    "save": "Spremi",
+    "delete": "Obriši",
+    "edit": "Uredi",
+    "view": "Prikaži",
+    "close": "Zatvori",
+    "back": "Natrag",
+    "next": "Sljedeće",
+    "previous": "Prethodno",
+    "search": "Pretraži",
+    "filter": "Filtriraj",
+    "sort": "Sortiraj",
+    "actions": "Akcije"
+  },
+  "navigation": {
+    "dashboard": "Nadzorna ploča",
+    "invoices": "Računi",
+    "clients": "Klijenti",
+    "settings": "Postavke",
+    "newInvoice": "Novi račun"
+  },
+  "invoices": {
+    "title": "Računi",
+    "subtitle": "Upravljajte svojim računima i pratite plaćanja",
+    "noInvoices": "Još nema računa",
+    "noInvoicesDescription": "Stvorite svoj prvi račun za početak",
+    "invoiceNumber": "Račun",
+    "client": "Klijent",
+    "issueDate": "Datum izdavanja",
+    "status": "Status",
+    "total": "Ukupno",
+    "downloadPDF": "Preuzmi PDF",
+    "deleteConfirm": "Jeste li sigurni da želite obrisati ovaj račun?",
+    "statuses": {
+      "DRAFT": "Nacrt",
+      "SENT": "Poslano",
+      "PAID": "Plaćeno",
+      "OVERDUE": "Dospjelo",
+      "CANCELLED": "Otkazano"
     }
+  },
+  "theme": {
+    "switchToDark": "Prebaci na tamni način",
+    "switchToLight": "Prebaci na svijetli način"
+  },
+  "notifications": {
+    "invoiceDeleted": "Račun je uspješno obrisan",
+    "invoiceDeleteError": "Neuspješno brisanje računa",
+    "pdfDownloaded": "PDF je uspješno preuzet",
+    "pdfDownloadError": "Neuspješno generiranje PDF-a",
+    "invoicesLoadError": "Neuspješno učitavanje računa. Provjerite je li API server pokrenut."
+  },
+  "landing": {
+    "header": {
+      "getStarted": "Počni"
+    },
+    "hero": {
+      "badge": "Pametno upravljanje računima",
+      "title": "Pojednostavite svoje poslovanje pametnim računima",
+      "subtitle": "Stvarajte, upravljajte i pratite račune s automatskim izračunima PDV-a i ažuriranjima poreznih propisa hrvatskih poreznih vlasti u stvarnom vremenu.",
+      "cta": "Počni upravljati računima",
+      "demo": "Pogledaj demo",
+      "demoTitle": "Pregled računa",
+      "demoDescription": "Profesionalni računi s automatskim izračunima i provjerom usklađenosti."
+    },
+    "stats": {
+      "invoices": "Obrađenih računa",
+      "clients": "Zadovoljnih klijenata",
+      "uptime": "Dostupnost",
+      "support": "Podrška"
+    },
+    "features": {
+      "title": "Moćne značajke",
+      "subtitle": "Sve što trebate za učinkovito upravljanje financijama vašeg poslovanja",
+      "invoicing": {
+        "title": "Pametni računi",
+        "description": "Stvarajte profesionalne račune s automatskim izračunima PDV-a i provjerom usklađenosti."
+      },
+      "automation": {
+        "title": "Automatizacija",
+        "description": "Automatizirajte ponavljajuće račune, podsjetnike za plaćanje i porezne izračune."
+      },
+      "security": {
+        "title": "Sigurnost na razini banke",
+        "description": "Vaši podaci su zaštićeni sigurnošću i šifriranjem na razini poduzeća."
+      },
+      "cloud": {
+        "title": "Oblak",
+        "description": "Pristupite svojim računima bilo gdje, bilo kada s našom sigurnom oblaku platformom."
+      }
+    },
+    "testimonials": {
+      "title": "Što kažu naši kupci",
+      "subtitle": "Pridružite se tisućama zadovoljnih poduzeća koja koriste Racunko",
+      "user1": {
+        "name": "Marko Petrović",
+        "role": "CEO, TechStart Croatia",
+        "content": "Racunko je revolucionirao naš proces izdavanja računa. Automatski porezni izračuni nam štede sate svaki tjedan."
+      },
+      "user2": {
+        "name": "Ana Novak",
+        "role": "Slobodni dizajner",
+        "content": "Konačno, rješenje za račune koje razumije hrvatske porezne propise. Toplo preporučujem!"
+      }
+    },
+    "cta": {
+      "title": "Spremni transformirati svoje račune?",
+      "subtitle": "Pridružite se tisućama poduzeća koja već koriste Racunko za pojednostavljenje svojih operacija.",
+      "button": "Počni besplatno"
+    },
+    "footer": {
+      "rights": "Sva prava pridržana."
+    }
+  }
 }

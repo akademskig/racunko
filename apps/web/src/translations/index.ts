@@ -1,9 +1,9 @@
-import enTranslations from "./en"
-import hrTranslations from "./hr"
+import enTranslations from './en';
+import hrTranslations from './hr';
 
 const translations = {
-    en: enTranslations,
-    hr: hrTranslations,
-}
+  en: enTranslations,
+  hr: hrTranslations,
+};
 
-export default translations
+export default translations;

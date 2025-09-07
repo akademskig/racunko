@@ -1,5 +1,5 @@
-'use client'
-import React from 'react'
+'use client';
+import React from 'react';
 import {
   Box,
   Container,
@@ -13,8 +13,8 @@ import {
   Paper,
   useTheme,
   alpha,
-} from '@mui/material'
-import { Grid2 as Grid } from '@mui/material'
+} from '@mui/material';
+import { Grid2 as Grid } from '@mui/material';
 import {
   Receipt as ReceiptIcon,
   Speed as SpeedIcon,
@@ -22,15 +22,15 @@ import {
   Cloud as CloudIcon,
   ArrowForward as ArrowForwardIcon,
   Star as StarIcon,
-} from '@mui/icons-material'
-import { ThemeToggle } from '@web/components/ThemeToggle'
-import { LanguageSwitcher } from '@web/components/LanguageSwitcher'
-import { useTranslation } from '@web/hooks/useTranslation'
-import Link from 'next/link'
+} from '@mui/icons-material';
+import { ThemeToggle } from '@web/components/ThemeToggle';
+import { LanguageSwitcher } from '@web/components/LanguageSwitcher';
+import { useTranslation } from '@web/hooks/useTranslation';
+import Link from 'next/link';
 
 export default function LandingPage() {
-  const { t } = useTranslation()
-  const theme = useTheme()
+  const { t } = useTranslation();
+  const theme = useTheme();
 
   const features = [
     {
@@ -53,14 +53,14 @@ export default function LandingPage() {
       title: t.landing.features.cloud.title,
       description: t.landing.features.cloud.description,
     },
-  ]
+  ];
 
   const stats = [
     { number: '10K+', label: t.landing.stats.invoices },
     { number: '500+', label: t.landing.stats.clients },
     { number: '99.9%', label: t.landing.stats.uptime },
     { number: '24/7', label: t.landing.stats.support },
-  ]
+  ];
 
   const testimonials = [
     {
@@ -75,7 +75,7 @@ export default function LandingPage() {
       content: t.landing.testimonials.user2.content,
       avatar: '👩‍💻',
     },
-  ]
+  ];
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
@@ -90,25 +90,20 @@ export default function LandingPage() {
           borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
         }}
       >
-        <Container maxWidth="lg">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            py={2}
-          >
-            <Box display="flex" alignItems="center" gap={2}>
-              <Typography variant="h5" fontWeight="bold" color="primary">
+        <Container maxWidth='lg'>
+          <Box display='flex' justifyContent='space-between' alignItems='center' py={2}>
+            <Box display='flex' alignItems='center' gap={2}>
+              <Typography variant='h5' fontWeight='bold' color='primary'>
                 Računko
               </Typography>
             </Box>
-            <Box display="flex" alignItems="center" gap={2}>
+            <Box display='flex' alignItems='center' gap={2}>
               <LanguageSwitcher />
               <ThemeToggle />
               <Button
                 component={Link}
                 href={`/invoices`}
-                variant="contained"
+                variant='contained'
                 endIcon={<ArrowForwardIcon />}
                 sx={{ borderRadius: 2 }}
               >
@@ -126,20 +121,20 @@ export default function LandingPage() {
           py: { xs: 8, md: 12 },
         }}
       >
-        <Container maxWidth="lg">
-          <Grid container spacing={6} alignItems="center">
+        <Container maxWidth='lg'>
+          <Grid container spacing={6} alignItems='center'>
             <Grid size={{ xs: 12, md: 6 }}>
               <Stack spacing={3}>
                 <Chip
                   label={t.landing.hero.badge}
-                  color="primary"
-                  variant="outlined"
+                  color='primary'
+                  variant='outlined'
                   sx={{ alignSelf: 'flex-start' }}
                 />
                 <Typography
-                  variant="h2"
-                  component="h1"
-                  fontWeight="bold"
+                  variant='h2'
+                  component='h1'
+                  fontWeight='bold'
                   sx={{
                     background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                     backgroundClip: 'text',
@@ -149,25 +144,21 @@ export default function LandingPage() {
                 >
                   {t.landing.hero.title}
                 </Typography>
-                <Typography variant="h6" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                <Typography variant='h6' color='text.secondary' sx={{ lineHeight: 1.6 }}>
                   {t.landing.hero.subtitle}
                 </Typography>
-                <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
+                <Stack direction='row' spacing={2} sx={{ mt: 4 }}>
                   <Button
                     component={Link}
                     href={`/invoices`}
-                    variant="contained"
-                    size="large"
+                    variant='contained'
+                    size='large'
                     endIcon={<ArrowForwardIcon />}
                     sx={{ borderRadius: 2, px: 4 }}
                   >
                     {t.landing.hero.cta}
                   </Button>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    sx={{ borderRadius: 2, px: 4 }}
-                  >
+                  <Button variant='outlined' size='large' sx={{ borderRadius: 2, px: 4 }}>
                     {t.landing.hero.demo}
                   </Button>
                 </Stack>
@@ -200,21 +191,21 @@ export default function LandingPage() {
                   }}
                 >
                   <Stack spacing={3}>
-                    <Box display="flex" alignItems="center" gap={2}>
-                      <ReceiptIcon color="primary" />
-                      <Typography variant="h6" fontWeight="bold">
+                    <Box display='flex' alignItems='center' gap={2}>
+                      <ReceiptIcon color='primary' />
+                      <Typography variant='h6' fontWeight='bold'>
                         {t.landing.hero.demoTitle}
                       </Typography>
                     </Box>
                     <Box>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant='body2' color='text.secondary'>
                         {t.landing.hero.demoDescription}
                       </Typography>
                     </Box>
-                    <Box display="flex" gap={1}>
-                      <Chip label="PDF" size="small" color="primary" />
-                      <Chip label="Email" size="small" color="secondary" />
-                      <Chip label="Tracking" size="small" color="success" />
+                    <Box display='flex' gap={1}>
+                      <Chip label='PDF' size='small' color='primary' />
+                      <Chip label='Email' size='small' color='secondary' />
+                      <Chip label='Tracking' size='small' color='success' />
                     </Box>
                   </Stack>
                 </Paper>
@@ -225,15 +216,15 @@ export default function LandingPage() {
       </Box>
 
       {/* Stats Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth='lg' sx={{ py: 8 }}>
         <Grid container spacing={4}>
           {stats.map((stat, index) => (
             <Grid size={{ xs: 6, md: 3 }} key={index}>
-              <Box textAlign="center">
-                <Typography variant="h3" fontWeight="bold" color="primary">
+              <Box textAlign='center'>
+                <Typography variant='h3' fontWeight='bold' color='primary'>
                   {stat.number}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant='body2' color='text.secondary'>
                   {stat.label}
                 </Typography>
               </Box>
@@ -244,12 +235,12 @@ export default function LandingPage() {
 
       {/* Features Section */}
       <Box sx={{ py: 8, bgcolor: alpha(theme.palette.background.paper, 0.5) }}>
-        <Container maxWidth="lg">
-          <Box textAlign="center" mb={6}>
-            <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
+        <Container maxWidth='lg'>
+          <Box textAlign='center' mb={6}>
+            <Typography variant='h3' component='h2' fontWeight='bold' gutterBottom>
               {t.landing.features.title}
             </Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography variant='h6' color='text.secondary'>
               {t.landing.features.subtitle}
             </Typography>
           </Box>
@@ -269,10 +260,10 @@ export default function LandingPage() {
                 >
                   <CardContent sx={{ p: 4 }}>
                     <Box mb={3}>{feature.icon}</Box>
-                    <Typography variant="h5" fontWeight="bold" gutterBottom>
+                    <Typography variant='h5' fontWeight='bold' gutterBottom>
                       {feature.title}
                     </Typography>
-                    <Typography variant="body1" color="text.secondary">
+                    <Typography variant='body1' color='text.secondary'>
                       {feature.description}
                     </Typography>
                   </CardContent>
@@ -284,12 +275,12 @@ export default function LandingPage() {
       </Box>
 
       {/* Testimonials Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Box textAlign="center" mb={6}>
-          <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
+      <Container maxWidth='lg' sx={{ py: 8 }}>
+        <Box textAlign='center' mb={6}>
+          <Typography variant='h3' component='h2' fontWeight='bold' gutterBottom>
             {t.landing.testimonials.title}
           </Typography>
-          <Typography variant="h6" color="text.secondary">
+          <Typography variant='h6' color='text.secondary'>
             {t.landing.testimonials.subtitle}
           </Typography>
         </Box>
@@ -298,25 +289,23 @@ export default function LandingPage() {
             <Grid size={{ xs: 12, md: 6 }} key={index}>
               <Card elevation={2} sx={{ height: '100%' }}>
                 <CardContent sx={{ p: 4 }}>
-                  <Box display="flex" alignItems="center" mb={3}>
-                    <Avatar sx={{ mr: 2, fontSize: '2rem' }}>
-                      {testimonial.avatar}
-                    </Avatar>
+                  <Box display='flex' alignItems='center' mb={3}>
+                    <Avatar sx={{ mr: 2, fontSize: '2rem' }}>{testimonial.avatar}</Avatar>
                     <Box>
-                      <Typography variant="h6" fontWeight="bold">
+                      <Typography variant='h6' fontWeight='bold'>
                         {testimonial.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant='body2' color='text.secondary'>
                         {testimonial.role}
                       </Typography>
                     </Box>
-                    <Box ml="auto">
+                    <Box ml='auto'>
                       {[...Array(5)].map((_, i) => (
                         <StarIcon key={i} sx={{ color: 'warning.main', fontSize: 20 }} />
                       ))}
                     </Box>
                   </Box>
-                  <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+                  <Typography variant='body1' sx={{ fontStyle: 'italic' }}>
                     "{testimonial.content}"
                   </Typography>
                 </CardContent>
@@ -333,19 +322,19 @@ export default function LandingPage() {
           py: 8,
         }}
       >
-        <Container maxWidth="md">
-          <Box textAlign="center" color="white">
-            <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
+        <Container maxWidth='md'>
+          <Box textAlign='center' color='white'>
+            <Typography variant='h3' component='h2' fontWeight='bold' gutterBottom>
               {t.landing.cta.title}
             </Typography>
-            <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
+            <Typography variant='h6' sx={{ mb: 4, opacity: 0.9 }}>
               {t.landing.cta.subtitle}
             </Typography>
             <Button
               component={Link}
               href={`/invoices`}
-              variant="contained"
-              size="large"
+              variant='contained'
+              size='large'
               endIcon={<ArrowForwardIcon />}
               sx={{
                 bgcolor: 'white',
@@ -365,14 +354,14 @@ export default function LandingPage() {
 
       {/* Footer */}
       <Box sx={{ py: 4, bgcolor: alpha(theme.palette.background.paper, 0.5) }}>
-        <Container maxWidth="lg">
-          <Box textAlign="center">
-            <Typography variant="body2" color="text.secondary">
+        <Container maxWidth='lg'>
+          <Box textAlign='center'>
+            <Typography variant='body2' color='text.secondary'>
               © 2024 Racunko. {t.landing.footer.rights}
             </Typography>
           </Box>
         </Container>
       </Box>
     </Box>
-  )
+  );
 }

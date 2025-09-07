@@ -1,40 +1,40 @@
-import puppeteer from 'puppeteer'
-import * as Handlebars from 'handlebars'
-import { InvoiceWithRelations } from './types'
+import puppeteer from 'puppeteer';
+import * as Handlebars from 'handlebars';
+import { InvoiceWithRelations } from './types';
 
 export async function generateInvoicePDF(invoice: InvoiceWithRelations): Promise<Buffer> {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    })
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
 
-    try {
-        const page = await browser.newPage()
+  try {
+    const page = await browser.newPage();
 
-        // Generate HTML from template
-        const html = generateInvoiceHTML(invoice)
+    // Generate HTML from template
+    const html = generateInvoiceHTML(invoice);
 
-        await page.setContent(html, { waitUntil: 'networkidle0' })
+    await page.setContent(html, { waitUntil: 'networkidle0' });
 
-        const pdfBuffer = await page.pdf({
-            format: 'A4',
-            printBackground: true,
-            margin: {
-                top: '20mm',
-                right: '20mm',
-                bottom: '20mm',
-                left: '20mm'
-            }
-        })
+    const pdfBuffer = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: {
+        top: '20mm',
+        right: '20mm',
+        bottom: '20mm',
+        left: '20mm',
+      },
+    });
 
-        return Buffer.from(pdfBuffer)
-    } finally {
-        await browser.close()
-    }
+    return Buffer.from(pdfBuffer);
+  } finally {
+    await browser.close();
+  }
 }
 
 function generateInvoiceHTML(invoice: InvoiceWithRelations): string {
-    const template = `
+  const template = `
 <!DOCTYPE html>
 <html lang="hr">
 <head>
@@ -288,20 +288,20 @@ function generateInvoiceHTML(invoice: InvoiceWithRelations): string {
     </div>
 </body>
 </html>
-  `
+  `;
 
-    // Register Handlebars helpers
-    Handlebars.registerHelper('formatDate', (date: Date) => {
-        return new Date(date).toLocaleDateString('hr-HR')
-    })
+  // Register Handlebars helpers
+  Handlebars.registerHelper('formatDate', (date: Date) => {
+    return new Date(date).toLocaleDateString('hr-HR');
+  });
 
-    Handlebars.registerHelper('formatCurrency', (amount: number) => {
-        return new Intl.NumberFormat('hr-HR', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(amount)
-    })
+  Handlebars.registerHelper('formatCurrency', (amount: number) => {
+    return new Intl.NumberFormat('hr-HR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  });
 
-    const compiledTemplate = Handlebars.compile(template)
-    return compiledTemplate(invoice)
+  const compiledTemplate = Handlebars.compile(template);
+  return compiledTemplate(invoice);
 }
