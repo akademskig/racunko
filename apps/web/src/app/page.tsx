@@ -27,6 +27,7 @@ import { ThemeToggle } from '@web/components/ThemeToggle';
 import { LanguageSwitcher } from '@web/components/LanguageSwitcher';
 import { useTranslation } from '@web/hooks/useTranslation';
 import Link from 'next/link';
+import Logo from '@web/components/Logo';
 
 export default function LandingPage() {
   const { t } = useTranslation();
@@ -93,9 +94,7 @@ export default function LandingPage() {
         <Container maxWidth='lg'>
           <Box display='flex' justifyContent='space-between' alignItems='center' py={2}>
             <Box display='flex' alignItems='center' gap={2}>
-              <Typography variant='h5' fontWeight='bold' color='primary'>
-                Računko
-              </Typography>
+              <Logo />
             </Box>
             <Box display='flex' alignItems='center' gap={2}>
               <LanguageSwitcher />
