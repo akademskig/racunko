@@ -1,0 +1,58 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "view": "View",
+        "close": "Close",
+        "back": "Back",
+        "next": "Next",
+        "previous": "Previous",
+        "search": "Search",
+        "filter": "Filter",
+        "sort": "Sort",
+        "actions": "Actions"
+    },
+    "navigation": {
+        "dashboard": "Dashboard",
+        "invoices": "Invoices",
+        "clients": "Clients",
+        "settings": "Settings",
+        "newInvoice": "New Invoice"
+    },
+    "invoices": {
+        "title": "Invoices",
+        "subtitle": "Manage your invoices and track payments",
+        "noInvoices": "No invoices yet",
+        "noInvoicesDescription": "Create your first invoice to get started",
+        "invoiceNumber": "Invoice",
+        "client": "Client",
+        "issueDate": "Issue Date",
+        "status": "Status",
+        "total": "Total",
+        "downloadPDF": "Download PDF",
+        "deleteConfirm": "Are you sure you want to delete this invoice?",
+        "statuses": {
+            "DRAFT": "Draft",
+            "SENT": "Sent",
+            "PAID": "Paid",
+            "OVERDUE": "Overdue",
+            "CANCELLED": "Cancelled"
+        }
+    },
+    "theme": {
+        "switchToDark": "Switch to dark mode",
+        "switchToLight": "Switch to light mode"
+    },
+    "notifications": {
+        "invoiceDeleted": "Invoice deleted successfully",
+        "invoiceDeleteError": "Failed to delete invoice",
+        "pdfDownloaded": "PDF downloaded successfully",
+        "pdfDownloadError": "Failed to generate PDF",
+        "invoicesLoadError": "Failed to load invoices. Please check if the API server is running."
+    }
+}

@@ -1,5 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useNotifications } from '../stores/appStore'
+import { useAddNotification } from '../stores/appStore'
+import { getTranslation } from './useTranslation'
+import { useLocale } from '../contexts/LocaleContext'
 
 // Types
 export interface Invoice {
@@ -65,29 +67,33 @@ export const useInvoices = () => {
 
 export const useDeleteInvoice = () => {
     const queryClient = useQueryClient()
-    const { add: addNotification } = useNotifications()
+    const addNotification = useAddNotification()
+    const { locale } = useLocale()
 
     return useMutation({
         mutationFn: deleteInvoice,
         onSuccess: () => {
             // Invalidate and refetch invoices
             queryClient.invalidateQueries({ queryKey: queryKeys.invoices })
+            const t = getTranslation(locale)
             addNotification({
                 type: 'success',
-                message: 'Invoice deleted successfully',
+                message: t.notifications.invoiceDeleted,
             })
         },
         onError: (error) => {
+            const t = getTranslation(locale)
             addNotification({
                 type: 'error',
-                message: error.message || 'Failed to delete invoice',
+                message: error.message || t.notifications.invoiceDeleteError,
             })
         },
     })
 }
 
 export const useDownloadInvoicePDF = () => {
-    const { add: addNotification } = useNotifications()
+    const addNotification = useAddNotification()
+    const { locale } = useLocale()
 
     return useMutation({
         mutationFn: downloadInvoicePDF,
@@ -102,15 +108,17 @@ export const useDownloadInvoicePDF = () => {
             window.URL.revokeObjectURL(url)
             document.body.removeChild(a)
 
+            const t = getTranslation(locale)
             addNotification({
                 type: 'success',
-                message: 'PDF downloaded successfully',
+                message: t.notifications.pdfDownloaded,
             })
         },
         onError: (error) => {
+            const t = getTranslation(locale)
             addNotification({
                 type: 'error',
-                message: error.message || 'Failed to generate PDF',
+                message: error.message || t.notifications.pdfDownloadError,
             })
         },
     })

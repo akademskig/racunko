@@ -29,17 +29,20 @@ import {
     Delete as DeleteIcon,
     Description as DescriptionIcon
 } from '@mui/icons-material'
-import { ThemeToggle } from '../../components/theme/ThemeToggle'
-import { Sidebar } from '../../components/Sidebar'
-import { useInvoices, useDeleteInvoice, useDownloadInvoicePDF, Invoice } from '../../hooks/useInvoices'
+import { ThemeToggle } from '@web/components/theme/ThemeToggle'
+import { Sidebar } from '@web/components/Sidebar'
+import { LanguageSwitcher } from '@web/components/LanguageSwitcher'
+import { useInvoices, useDeleteInvoice, useDownloadInvoicePDF, Invoice } from '@web/hooks/useInvoices'
+import { useTranslation } from '@web/hooks/useTranslation'
 
 export default function InvoicesPage() {
     const { data: invoices = [], isLoading, error } = useInvoices()
     const deleteInvoiceMutation = useDeleteInvoice()
     const downloadPDFMutation = useDownloadInvoicePDF()
+    const { t } = useTranslation()
 
     const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this invoice?')) return
+        if (!confirm(t.invoices.deleteConfirm)) return
         deleteInvoiceMutation.mutate(id)
     }
 
@@ -58,13 +61,17 @@ export default function InvoicesPage() {
         }
     }
 
+    const getStatusLabel = (status: string): string => {
+        return t.invoices.statuses[status as keyof typeof t.invoices.statuses] || status
+    }
+
     if (isLoading) {
         return (
             <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Box textAlign="center">
                     <CircularProgress size={60} />
                     <Typography variant="h6" sx={{ mt: 2 }}>
-                        Loading invoices...
+                        {t.common.loading}
                     </Typography>
                 </Box>
             </Box>
@@ -79,14 +86,15 @@ export default function InvoicesPage() {
                         <Sidebar />
                         <Box>
                             <Typography variant="h3" component="h1" gutterBottom>
-                                Invoices
+                                {t.invoices.title}
                             </Typography>
                             <Typography variant="body1" color="text.secondary">
-                                Manage your invoices and track payments
+                                {t.invoices.subtitle}
                             </Typography>
                         </Box>
                     </Box>
                     <Box display="flex" alignItems="center" gap={2}>
+                        <LanguageSwitcher />
                         <ThemeToggle />
                         <Button
                             component={Link}
@@ -95,14 +103,14 @@ export default function InvoicesPage() {
                             startIcon={<AddIcon />}
                             size="large"
                         >
-                            New Invoice
+                            {t.navigation.newInvoice}
                         </Button>
                     </Box>
                 </Box>
 
                 {error && (
                     <Alert severity="error" sx={{ mb: 3 }}>
-                        {error.message || 'Failed to load invoices. Please check if the API server is running.'}
+                        {error.message || t.notifications.invoicesLoadError}
                     </Alert>
                 )}
 
@@ -110,12 +118,12 @@ export default function InvoicesPage() {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Invoice</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Client</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Issue Date</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Total</TableCell>
-                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Actions</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>{t.invoices.invoiceNumber}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>{t.invoices.client}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>{t.invoices.issueDate}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>{t.invoices.status}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>{t.invoices.total}</TableCell>
+                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>{t.common.actions}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -125,10 +133,10 @@ export default function InvoicesPage() {
                                         <Box textAlign="center">
                                             <DescriptionIcon sx={{ fontSize: 60, color: 'grey.300', mb: 2 }} />
                                             <Typography variant="h6" color="text.secondary" gutterBottom>
-                                                No invoices yet
+                                                {t.invoices.noInvoices}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                                Create your first invoice to get started
+                                                {t.invoices.noInvoicesDescription}
                                             </Typography>
                                         </Box>
                                     </TableCell>
@@ -153,7 +161,7 @@ export default function InvoicesPage() {
                                         </TableCell>
                                         <TableCell>
                                             <Chip
-                                                label={invoice.status}
+                                                label={getStatusLabel(invoice.status)}
                                                 color={getStatusColor(invoice.status)}
                                                 size="small"
                                             />
@@ -165,7 +173,7 @@ export default function InvoicesPage() {
                                         </TableCell>
                                         <TableCell align="right">
                                             <Stack direction="row" spacing={1} justifyContent="flex-end">
-                                                <Tooltip title="Download PDF">
+                                                <Tooltip title={t.invoices.downloadPDF}>
                                                     <IconButton
                                                         size="small"
                                                         onClick={() => handleDownloadPDF(invoice.id)}
@@ -179,7 +187,7 @@ export default function InvoicesPage() {
                                                         )}
                                                     </IconButton>
                                                 </Tooltip>
-                                                <Tooltip title="View">
+                                                <Tooltip title={t.common.view}>
                                                     <IconButton
                                                         size="small"
                                                         component={Link}
@@ -189,7 +197,7 @@ export default function InvoicesPage() {
                                                         <VisibilityIcon fontSize="small" />
                                                     </IconButton>
                                                 </Tooltip>
-                                                <Tooltip title="Edit">
+                                                <Tooltip title={t.common.edit}>
                                                     <IconButton
                                                         size="small"
                                                         component={Link}
@@ -199,7 +207,7 @@ export default function InvoicesPage() {
                                                         <EditIcon fontSize="small" />
                                                     </IconButton>
                                                 </Tooltip>
-                                                <Tooltip title="Delete">
+                                                <Tooltip title={t.common.delete}>
                                                     <IconButton
                                                         size="small"
                                                         onClick={() => handleDelete(invoice.id)}

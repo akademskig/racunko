@@ -4,13 +4,15 @@ import React from 'react'
 import { IconButton, Tooltip, Box } from '@mui/material'
 import { Brightness4, Brightness7 } from '@mui/icons-material'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useTranslation } from '../../hooks/useTranslation'
 
 export const ThemeToggle: React.FC = () => {
     const { mode, toggleTheme } = useTheme()
+    const { t } = useTranslation()
 
     return (
         <Box>
-            <Tooltip title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}>
+            <Tooltip title={mode === 'light' ? t.theme.switchToDark : t.theme.switchToLight}>
                 <IconButton
                     onClick={toggleTheme}
                     color="inherit"

@@ -19,17 +19,19 @@ import {
     Settings as SettingsIcon,
 } from '@mui/icons-material'
 import { useSidebarOpen, useSetSidebarOpen } from '../stores/appStore'
-
-const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />, href: '/' },
-    { text: 'Invoices', icon: <ReceiptIcon />, href: '/invoices' },
-    { text: 'Clients', icon: <PeopleIcon />, href: '/clients' },
-    { text: 'Settings', icon: <SettingsIcon />, href: '/settings' },
-]
+import { useTranslation } from '../hooks/useTranslation'
 
 export const Sidebar: React.FC = () => {
     const isOpen = useSidebarOpen()
     const setOpen = useSetSidebarOpen()
+    const { t } = useTranslation()
+
+    const menuItems = [
+        { text: t.navigation.dashboard, icon: <DashboardIcon />, href: '/' },
+        { text: t.navigation.invoices, icon: <ReceiptIcon />, href: '/invoices' },
+        { text: t.navigation.clients, icon: <PeopleIcon />, href: '/clients' },
+        { text: t.navigation.settings, icon: <SettingsIcon />, href: '/settings' },
+    ]
 
     return (
         <>
