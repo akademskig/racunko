@@ -23,11 +23,8 @@ import {
   ArrowForward as ArrowForwardIcon,
   Star as StarIcon,
 } from '@mui/icons-material';
-import { ThemeToggle } from '@web/components/ThemeToggle';
-import { LanguageSwitcher } from '@web/components/LanguageSwitcher';
 import { useTranslation } from '@web/hooks/useTranslation';
 import Link from 'next/link';
-import Logo from '@web/components/Logo';
 
 export default function LandingPage() {
   const { t } = useTranslation();
@@ -80,40 +77,6 @@ export default function LandingPage() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      {/* Header */}
-      <Box
-        sx={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
-          bgcolor: alpha(theme.palette.background.paper, 0.8),
-          backdropFilter: 'blur(10px)',
-          borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
-        }}
-      >
-        <Container maxWidth='lg'>
-          <Box display='flex' justifyContent='space-between' alignItems='center' py={2}>
-            <Box display='flex' alignItems='center' gap={2}>
-              <Logo />
-            </Box>
-            <Box display='flex' alignItems='center' gap={2}>
-              <LanguageSwitcher />
-              <ThemeToggle />
-              <Button
-                component={Link}
-                href={`/invoices`}
-                variant='contained'
-                endIcon={<ArrowForwardIcon />}
-                sx={{ borderRadius: 2 }}
-              >
-                {t.landing.header.getStarted}
-              </Button>
-            </Box>
-          </Box>
-        </Container>
-      </Box>
-
-      {/* Hero Section */}
       <Box
         sx={{
           background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(theme.palette.secondary.main, 0.1)} 100%)`,

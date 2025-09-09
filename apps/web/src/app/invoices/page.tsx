@@ -98,7 +98,6 @@ export default function InvoicesPage() {
       <Container maxWidth='lg' sx={{ py: 4 }}>
         <Box display='flex' justifyContent='space-between' alignItems='center' mb={4}>
           <Box display='flex' alignItems='center' gap={2}>
-            <Sidebar />
             <Box>
               <Typography variant='h3' component='h1' gutterBottom>
                 {t.invoices.title}
